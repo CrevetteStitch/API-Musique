@@ -1,0 +1,112 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Music API",
+      "version": "1.0.0",
+      "description": "API for managing music"
+    },
+    "paths": {
+      "/api/v1/": {
+        "get": {
+          "summary": "Get welcome message",
+          "responses": {
+            "200": {
+              "description": "Welcome message",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "message": "Welcome to the Music API"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Create new item",
+          "responses": {
+            "200": {
+              "description": "Success message",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "message": "Bravo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/musics": {
+        "get": {
+          "summary": "Get all musics",
+          "responses": {
+            "200": {
+              "description": "List of musics"
+            }
+          }
+        },
+        "post": {
+          "summary": "Create a new music",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MusicInput"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success message"
+            }
+          }
+        }
+      },
+      "/api/v1/musics/{id}": {
+        "get": {
+          "summary": "Get music by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID of the music to retrieve",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Music data"
+            }
+          }
+        }
+      },
+      "/api/v1/musics/random": {
+        "get": {
+          "summary": "Get a random music",
+          "responses": {
+            "200": {
+              "description": "Random music data"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "MusicInput": {
+          "type": "object",
+          "properties": {
+           
+          }
+        }
+      }
+    }
+  }
+  
