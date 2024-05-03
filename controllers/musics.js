@@ -1,8 +1,9 @@
-const data = require('./../models/data.json')
-
+//const data = require('./../models/data.json')
+const { OPEN_READWRITE } = require('sqlite3');
+const Music = require('./../models/music')
 const controllerMusic = 
 {
-    find: (req, res) =>{
+    find: async (req, res) =>{
         if(req.query.search){
                 const query = req.query.search;
                 const result = data.filter(song => song.title.toLowerCase().includes(query.toLowerCase()));
@@ -12,6 +13,7 @@ const controllerMusic =
                 res.status(200).json({ result });
                 console.log(result);
         }else{
+        const data = await Music.findAll()
         res.status(200).json({result: data })
         }
     },
@@ -28,8 +30,9 @@ const controllerMusic =
         return res.status(200).json({result : data[id-1]})
     },
 
-    create: (req, res) => {
+    create: async (req, res) => {
         console.log(req.body)
+        const data = await Music.create(req.body);
         res.status(201).json({message : "Music created", data : req.body})
         
     },
@@ -37,6 +40,17 @@ const controllerMusic =
     random: (req, res)=>{
         const random = Math.floor(Math.random() * data.length);
         res.status(200).json({result : data[random]})
+    },
+
+    delete: async (req, res) => {
+        const id = req.params.id;
+        const data = await Music.destroy({
+            where: {
+                id:idMusic;
+            }
+        });
+    res.status(200).json({message : "Music deleted"})
+ 
     }
 }
 
