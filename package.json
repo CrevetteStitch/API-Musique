@@ -1,10 +1,10 @@
 {
-  "name": "api_vignile",
+  "name": "api",
   "version": "1.0.0",
   "description": "",
   "main": "serveur.js",
   "scripts": {
-    "start": "node serveur.js"
+    "start": "nodemon serveur.js"
   },
   "keywords": [],
   "author": "",

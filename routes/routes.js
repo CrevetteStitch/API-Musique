@@ -1,22 +1,24 @@
 const express = require('express');
 const router = express.Router();
-const controllerMusic = require('./../controllers/musics.js');
+const controllerMusic = require('./../controllers/musics')
+//const {random} = require('./..:controllers/musics')
 
-// Route pour la racine de l'API
 router.get('/', (req, res) => {
-    res.status(200).json({ message: 'Welcome to the Music API' });
+    res.status(200).json({ success: 'RACINE API' });
 });
 
-// Autres routes de l'API
 router.post('/', (req, res) => {
-    res.status(200).json({ message: 'Bravo' });
+    res.status(200).json({ success: 'bounty' });
 });
 
 router.get('/musics', controllerMusic.find);
-router.get('/musics/:id', controllerMusic.findById);
-router.get('/musics/random', controllerMusic.random);
+
 router.post('/musics', controllerMusic.create);
+
 router.delete('/musics/:id', controllerMusic.delete);
 
-module.exports = router;
+router.get('/musics/:id', controllerMusic.findById);
 
+router.get('/musics/random', controllerMusic.random);
+
+module.exports = router;

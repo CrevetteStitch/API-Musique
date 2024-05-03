@@ -1,112 +1,111 @@
 {
     "openapi": "3.0.0",
     "info": {
-      "title": "Music API",
-      "version": "1.0.0",
-      "description": "API for managing music"
+        "title": "API de gestion de musique",
+        "version": "1.0.0",
+        "description": "Une API pour gérer des informations sur la musique."
     },
     "paths": {
-      "/api/v1/": {
-        "get": {
-          "summary": "Get welcome message",
-          "responses": {
-            "200": {
-              "description": "Welcome message",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "Welcome to the Music API"
-                  }
+        "/api/v1/": {
+            "get": {
+                "summary": "RACINE API",
+                "responses": {
+                    "200": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "success": "RACINE API"
+                                }
+                            }
+                        }
+                    }
                 }
-              }
+            },
+            "post": {
+                "summary": "Créer une ressource",
+                "responses": {
+                    "200": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "success": "bounty"
+                                }
+                            }
+                        }
+                    }
+                }
             }
-          }
         },
-        "post": {
-          "summary": "Create new item",
-          "responses": {
-            "200": {
-              "description": "Success message",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "Bravo"
-                  }
+        "/api/v1/musics": {
+            "get": {
+                "summary": "Obtenir la liste des musiques",
+                "responses": {
+                    "200": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "example": {}
+                            }
+                        }
+                    }
                 }
-              }
+            },
+            "post": {
+                "summary": "Créer une nouvelle musique",
+                "responses": {
+                    "200": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "example": {}
+                            }
+                        }
+                    }
+                }
             }
-          }
-        }
-      },
-      "/api/v1/musics": {
-        "get": {
-          "summary": "Get all musics",
-          "responses": {
-            "200": {
-              "description": "List of musics"
-            }
-          }
         },
-        "post": {
-          "summary": "Create a new music",
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MusicInput"
+        "/api/v1/musics/{id}": {
+            "get": {
+                "summary": "Obtenir une musique par ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID de la musique",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "example": {}
+                            }
+                        }
+                    }
                 }
-              }
             }
-          },
-          "responses": {
-            "200": {
-              "description": "Success message"
+        },
+        "/api/v1/musics/random": {
+            "get": {
+                "summary": "Obtenir une musique aléatoire",
+                "responses": {
+                    "200": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "example": {}
+                            }
+                        }
+                    }
+                }
             }
-          }
         }
-      },
-      "/api/v1/musics/{id}": {
-        "get": {
-          "summary": "Get music by ID",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "description": "ID of the music to retrieve",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Music data"
-            }
-          }
-        }
-      },
-      "/api/v1/musics/random": {
-        "get": {
-          "summary": "Get a random music",
-          "responses": {
-            "200": {
-              "description": "Random music data"
-            }
-          }
-        }
-      }
-    },
-    "components": {
-      "schemas": {
-        "MusicInput": {
-          "type": "object",
-          "properties": {
-           
-          }
-        }
-      }
     }
-  }
-  
+}
