@@ -8,7 +8,23 @@ const version = 'v1';
 const router = require('./routes/routes');
 const app = express();
 const Music = require('./models/music');
+const connexion = require('./DB/dbconnect');
 
+
+const sequelize = new Sequelize('database', 'username', 'password', {
+    host: 'localhost',
+    dialect: 'sqlite',
+    storage: './db/database.sqlite',
+    database: './db/database.sqlite',
+  });
+
+  connexion.sync().then(() => {
+    console.log('Database synchronised.');
+    app.listen(port, () => {
+      console.log(`Example app listening at http://localhost:${port}`);
+  });
+  });
+  
 
  (async function testConnection() {
      try {
@@ -21,14 +37,16 @@ const Music = require('./models/music');
   
 
   (async () => {
-    await Music.sync({ force: true }).then(() => {
+    await Music.sync(/*{ force: true }*/).then(() => {
       console.log('Models synchronized successfully.');
     }).catch(e => {
       console.log(e);
     });
-    const music1 = await Music.create({ cover: "harry_styles-watermelon_sugar.jpg", sound: "Harry_Styles-Watermelon_Sugar.mp3", title: "Harry Styles - Watermelon Sugar", category: "pop"});
-    const music2 = await Music.create({ cover: "THOMAS_styles-watermelon_sugar.jpg", sound: "Harry_Styles-Watermelon_Sugar.mp3", title: "Harry Styles - Watermelon Sugar", category: "pop"});
-    //console.log(await Music.findAll());
+    // const data = require('./models/data.json');
+    // data.forEach(async (music) => {
+    //     await Music.create({cover: music.cover,sound: music.sound,title: music.title,category: music.category});
+        
+    // });
   })();
 
 app.use(cors());
@@ -36,7 +54,3 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(`/api/${version}`, router);
 app.use(`/api-docs`, swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
-});
